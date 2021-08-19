@@ -29,8 +29,8 @@ const Form = (props) => {
     }
 
     const form = () => (
-        <div className="form">
-            <form className="container" onSubmit={handleSubmit}>
+        <div className="form container">
+            <form onSubmit={handleSubmit}>
             <div>
                 <a href="/"><img src="/photos/smaller.png" width="200px"/></a>
                 <p className="text-info"><b className="h4 font-weight-bold">The Del Real Group Registration: </b><br/>

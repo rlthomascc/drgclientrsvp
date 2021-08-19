@@ -1,16 +1,16 @@
 
 body {
     background-image: url("https://i.imgur.com/MB1t6uK.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
+    /* -webkit-background-size: cover; */
+    /* -moz-background-size: cover; */
+    /* -o-background-size: cover; */
+    /* background-size: cover; */
+    background-repeat: repeat;
     font-family: verdana;
     font-size: 80%;
 }
 
-.form, .formhub {
+.form{
     background-color: rgba(255, 255, 255, 0.925);
     width: 80%;
     margin: auto;
@@ -18,6 +18,17 @@ body {
     text-align: center;
     margin-top: 5%;
     border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.formhub {
+  background-color: rgba(255, 255, 255, 0.925);
+  margin: auto;
+  margin-top: 2%;
+  border-radius: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .success {

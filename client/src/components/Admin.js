@@ -88,7 +88,7 @@ class Admin extends Component {
         <a href="/"><img src="/photos/smaller.png" width="200px"/></a>
         <p id="totalCount" className="font-weight-bold h6">Total Registered Guests: {this.state.total} | Total Guests In Attendance: {this.state.guests}</p>
         <br/>
-        <form className="container formhub col-sm-10 align-content-center" onSubmit={this.printNameTag.bind(this)}>
+        <form className="formhub col-sm-10 align-content-center" onSubmit={this.printNameTag.bind(this)}>
           <div className="form-group">
             <label className="font-weight-bold text-primary h4">Check in Leads</label>
             <br/>
@@ -103,7 +103,7 @@ class Admin extends Component {
         <button type="submit" className="btn btn-primary">Print Name Tag</button>
         </form>
 
-        <form className="container formhub col-sm-11" onSubmit={this.createCsv.bind(this)}>
+        <form className="formhub col-sm-11" onSubmit={this.createCsv.bind(this)}>
               <div className="form-group">
                 <label className="font-weight-bold text-primary h4">Export Leads</label>
                 <br/>
@@ -128,7 +128,7 @@ class Admin extends Component {
   password() {
     return (
       <div  className="container form">
-        <form className="container col-sm-10 align-content-center" onSubmit={this.handleSubmit.bind(this)}>
+        <form className="formhub col-sm-10 align-content-center" onSubmit={this.handleSubmit.bind(this)}>
             <div className="form-group">
               <a href="/"><img src="/photos/smaller.png" width="200px"/></a>
               <br/>
