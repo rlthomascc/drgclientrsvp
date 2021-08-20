@@ -1,2 +1,4 @@
 ### NPM ###
 node_modules
+# webpack: ^2.2.1
+# mongoose.connect("mongodb+srv://TheDelRealGroup:Drg123@thedelrealgroup.dtsnr.mongodb.net/thedelrealgroup?retryWrites=true&w=majority")

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import axios from 'axios';
-import { AlertContext } from 'twilio/lib/rest/monitor/v1/alert';
 
 
 
@@ -15,9 +14,9 @@ class Admin extends Component {
       agents: [],
       total: 0,
       guests: 0,
-      leadName: "",
-      leadInput: "",
-      csv: ""
+      suggestionNames: [],
+      suggestionPhones: [],
+      csv: "",
     }
   }
 
@@ -78,8 +77,42 @@ class Admin extends Component {
     }
   }
 
+
+  printByPhone(e) {
+    e.preventDefault();
+    let potentialLeads = [];
+    let input = e.target.value;
+    this.state.docs.forEach((elem, i) => {
+      if (elem.phoneNumber.toString().substring(0, input.length) === input) {
+        potentialLeads.push(elem.phoneNumber.toString());
+      }
+    })
+    this.setState({
+      suggestionPhones: potentialLeads
+    })
+  }
+
+  printByName(e) {
+    e.preventDefault();
+    let potentialLeads = [];
+    let input = e.target.value;
+    this.state.docs.forEach((elem, i) => {
+      if (elem.fullName.toLowerCase().substring(0, input.length) === input.toLowerCase()) {
+        potentialLeads.push(elem.fullName)
+      } 
+      if (elem.spouseName.toLowerCase().substring(0, input.length) === input.toLowerCase()){
+        potentialLeads.push(elem.spouseName)
+      }
+    })
+    this.setState({
+      suggestionNames: potentialLeads
+    })
+  }
+
   printNameTag(e) {
     e.preventDefault();
+    let name = e.target.name.value;
+    let phone = e.target.phoneNumber.value;
   }
 
   authentic() {
@@ -88,34 +121,56 @@ class Admin extends Component {
         <a href="/"><img src="/photos/smaller.png" width="200px"/></a>
         <p id="totalCount" className="font-weight-bold h6">Total Registered Guests: {this.state.total} | Total Guests In Attendance: {this.state.guests}</p>
         <br/>
+
+        {/* PRINT OUT NAMETAGS */}
         <form className="formhub col-sm-10 align-content-center" onSubmit={this.printNameTag.bind(this)}>
           <div className="form-group">
             <label className="font-weight-bold text-primary h4">Check in Leads</label>
             <br/>
             <br/>
             <label className="font-weight-bold h6">Check in by Name</label>
-            <input type="text" id="name" className="form-control" placeholder="Full Name" onChange={this.printNameTag.bind(this)} />
+              <input list="nameUL" type="text" id="name" className="form-control" onFocus={this.state.suggestion} onChange={this.printByName.bind(this)} />
+              <datalist id="nameUL">
+                {this.state.suggestionNames.map((elem, i) => {
+                  return <option key={i} value={elem}>{elem}</option>
+                })}
+              </datalist>
+              <small className="form-text text-muted">
+                Type in clients full name.
+              </small>
           </div>
           <div className="form-group">
             <label className="font-weight-bold h6">Check in by Phone Number</label>
-            <input type="text" id="phoneNumber" className="form-control" placeholder="Enter 10 digit Phone Number" pattern="\d*" minLength="7" maxLength="10" onChange={this.printNameTag.bind(this)} />
+            <input list="phoneUL" type="text" id="phoneNumber" className="form-control" pattern="\d*" minLength="7" maxLength="10" onChange={this.printByPhone.bind(this)} />
+            <datalist id="phoneUL">
+                {this.state.suggestionPhones.map((elem, i) => {
+                  return <option key={i} value={elem}>{elem}</option>
+                })}
+              </datalist>
+            <small className="form-text text-muted">
+              Enter phone number with numbers only, no special characters.
+            </small>
         </div>
         <button type="submit" className="btn btn-primary">Print Name Tag</button>
         </form>
 
+
+        {/* PRINT OUT CSV */}
         <form className="formhub col-sm-11" onSubmit={this.createCsv.bind(this)}>
               <div className="form-group">
                 <label className="font-weight-bold text-primary h4">Export Leads</label>
                 <br/>
                 <br />
                 <label className="font-weight-bold h6">Choose Agent</label>
-                <p className="text-warning font-style-italic">**if name not showing then they do not have records in database**</p>
                 <select className="form-control" id="agent" required>
                   <option value="All">All Agent Leads</option>
                   {this.state.agents.map((e, i) => {
                     return <option key={i} value={e}>{e}</option>
                   })}
               </select>
+              <small className="form-text text-warning">
+              **if name not showing then they do not have records in database**
+              </small>
               </div>
               <div>
                   <button type="submit" className="btn btn-primary">Download CSV</button>

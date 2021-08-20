@@ -40,15 +40,24 @@ const Form = (props) => {
                 <div className="col">
                     <label>Full Name</label>
                     <input type="text" className="form-control" placeholder="John Doe" id="fullname" required />
+                    <small className="form-text text-muted">
+                    Enter your full first and last name.
+                    </small>
                 </div>
                 <div className="col">
                     <label>Spouse Name</label>
-                    <input type="text" className="form-control" placeholder="Jane Doe" id="spousename" required />
+                    <input type="text" className="form-control" placeholder="Jane Doe" id="spousename" />
+                    <small className="form-text text-muted">
+                    Enter full first and last name of your spouse.
+                    </small>
                 </div>
             </div>
             <div className="form-group">
                 <label>Phone Number</label>
                 <input type="text" className="form-control" placeholder="Enter 10 digit Phone Number" pattern="\d*" minLength="7" maxLength="10" id="phoneNumber" required />
+                <small className="form-text text-muted">
+                Enter phone number with numbers only, no special characters.
+                </small>
             </div>
             <div className="form-group">
                 <label>Agent</label>
