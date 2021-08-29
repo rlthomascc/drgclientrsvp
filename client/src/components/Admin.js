@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 import axios from 'axios';
+import printJS from 'print-js';
+
 
 
 
@@ -14,6 +16,7 @@ class Admin extends Component {
       agents: [],
       total: 0,
       guests: 0,
+      lead: {},
       suggestionNames: [],
       suggestionPhones: [],
       csv: "",
@@ -81,43 +84,89 @@ class Admin extends Component {
   printByPhone(e) {
     e.preventDefault();
     let potentialLeads = [];
+    let doc = [];
     let input = e.target.value;
     this.state.docs.forEach((elem, i) => {
       if (elem.phoneNumber.toString().substring(0, input.length) === input) {
         potentialLeads.push(elem.phoneNumber.toString());
+        doc.push(elem);
       }
     })
     this.setState({
-      suggestionPhones: potentialLeads
+      suggestionPhones: potentialLeads,
+      lead: doc
     })
   }
 
   printByName(e) {
     e.preventDefault();
     let potentialLeads = [];
+    let doc = [];
     let input = e.target.value;
     this.state.docs.forEach((elem, i) => {
       if (elem.fullName.toLowerCase().substring(0, input.length) === input.toLowerCase()) {
         potentialLeads.push(elem.fullName)
+        doc.push(elem);
       } 
       if (elem.spouseName.toLowerCase().substring(0, input.length) === input.toLowerCase()){
         potentialLeads.push(elem.spouseName)
+        doc.push(elem);
       }
     })
     this.setState({
-      suggestionNames: potentialLeads
+      suggestionNames: potentialLeads,
+      lead: doc
     })
   }
 
   printNameTag(e) {
     e.preventDefault();
-    let name = e.target.name.value;
-    let phone = e.target.phoneNumber.value;
+    let lead = this.state.lead[0];
+
+    // nameTag Style
+    const style = `<style>
+    tagBody {
+        width: 8.5in;
+        margin: 0in .1875in;
+        }
+    .label{
+        /* Avery 5395 labels */
+        width: 3.38in; /* plus .6 inches from padding */
+        height: 2.33in; /* plus .125 inches from padding */
+        padding: 0;
+        padding: .125in .3in 0;
+        margin-right: .38in; /* the gutter */
+        margin-bottom: .19in; /* the gutter */
+
+        float: left;
+
+        text-align: center;
+        overflow: hidden;
+
+        outline: 1px dotted; /* outline doesn't occupy space like border does */
+        }
+    .page-break  {
+        clear: left;
+        display:block;
+        page-break-after:always;
+        }
+    </style>`
+
+    let nameTag = `<div class="tagBody label"><br/><br/><br/> <h1>${lead.fullName}</h1><p>Agent: ${lead.agent}</p></div>
+    <div class="tagBody label"><br/><br/><br/><h1>${lead.spouseName}</h1><p>Agent: ${lead.agent}</p></div>`
+
+    printJS({
+      printable: nameTag,
+        type: 'raw-html',
+        style: style
+    });
+    console.log(this.state.lead, 'LEADS');
   }
 
   authentic() {
     return (
       <div className="container form">
+
         <a href="/"><img src="/photos/smaller.png" width="200px"/></a>
         <p id="totalCount" className="font-weight-bold h6">Total Registered Guests: {this.state.total} | Total Guests In Attendance: {this.state.guests}</p>
         <br/>

@@ -25,7 +25,6 @@ const Output = (props) => {
   
     return (
         <div className="success">
-        {console.log(props, 'PROPS')}
         {output()}
       </div>
     );

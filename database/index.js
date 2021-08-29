@@ -17,8 +17,11 @@ let rsvpSchema = ({
   phoneNumber: Number,
   agent: String,
   guests: Number,
-  publish: {type: Boolean, default: true},
-  timestamp: {type: String, default: dateString, index: true}
+  publish: { type: Boolean, default: true },
+  rsvp: { type: Boolean, default: false },
+  archive: { type: Boolean, default: false },
+  timestamp: { type: String, default: dateString, index: true },
+  timeOfEntry: {type: String, default: todaysDate, index: true }
 });
 
 let Rsvp = mongoose.model('Rsvp', rsvpSchema)

@@ -8,15 +8,8 @@ import {
 const Form = (props) => {
 
 
-    const getAllData = () => {
-        axios.get('/rsvp')
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        getAllData();
         axios.post('/rsvp', {
             name: e.target.fullname.value,
             spouseName: e.target.spousename.value,
