@@ -24,7 +24,7 @@ const sms = (data) => {
   client.messages.create({
   body: `Thank you ${data.name} for taking the time to RSVP to the 2022 Del Real Group Client Appreciation Event!
 
-Your agent ${data.agent} & the Del Real Group looks forward to seeing you and your ${data.guests} guests! 
+Your agent ${data.agent} & the Del Real Group looks forward to seeing you and your ${data.guests} guests on September 23rd at 5pm! 
 
 Please reach out to ${data.agent} directly if you have anything that needs to be changed or requirements`,
   from: '+12093993200',

@@ -17,6 +17,7 @@ let rsvpSchema = ({
   phoneNumber: Number,
   agent: String,
   guests: Number,
+  meat: String,
   publish: { type: Boolean, default: true },
   rsvp: { type: Boolean, default: false },
   archive: { type: Boolean, default: false },
@@ -41,12 +42,13 @@ let invitesSchema = ({
 let Invites = mongoose.model('Invites', invitesSchema)
 
 function save(e) {
-  let obj = new Rsvp({
+  let obj = new Rsvp2022({
     fullName: e.name,
     spouseName: e.spouseName,
     phoneNumber: e.phone,
     agent: e.agent,
     guests: e.guests,
+    meat: e.meat
   });
   obj.save()
 }

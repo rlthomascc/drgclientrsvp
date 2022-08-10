@@ -16,6 +16,8 @@ class Admin extends Component {
       agents: [],
       total: 0,
       guests: 0,
+      meat: 0,
+      noMeat: 0,
       lead: {},
       suggestionNames: [],
       suggestionPhones: [],
@@ -26,6 +28,8 @@ class Admin extends Component {
   componentDidMount() {
     let agents = []
     let data = [];
+    let meat = 0;
+    let noMeat = 0;
 
     axios.get('/rsvp')
     .then(res => {
@@ -34,14 +38,31 @@ class Admin extends Component {
         if (!agents.includes(elem.agent)){
           agents.push(elem.agent);
         }
+        let meat2 = 0;
+        let noMeat2 = 0;
+        data.forEach((elem) => {
+          if (elem.meat === "true") {
+            meat2++
+          } else if (elem.meat === "false"){
+            noMeat2++
+          }
+        })
+        meat = meat2
+        noMeat = noMeat2
       });
+
+
+
+
       this.setState({
         docs: data,
         agents: agents,
         total: res.data.length,
         guests: res.data.reduce((acc, elem) => {
             return acc + elem.guests
-        }, 0)
+        }, 0),
+        meat: meat,
+        noMeat: noMeat
       })
     })
     .catch(err => { console.log(err) })
@@ -172,6 +193,7 @@ class Admin extends Component {
 
         <a href="/"><img src="/photos/smaller.png" width="200px"/></a>
         <p id="totalCount" className="font-weight-bold h6">Total Registered Guests: {this.state.total} | Total Guests In Attendance: {this.state.guests}</p>
+        <p id="totalCount" className="font-weight-bold h6">Total Meat: {this.state.meat} | Total Vegetarian: {this.state.noMeat}</p>
         <br/>
 
         {/* PRINT OUT NAMETAGS */}

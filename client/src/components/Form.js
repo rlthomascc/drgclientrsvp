@@ -16,6 +16,7 @@ const Form = (props) => {
             phone: e.target.phoneNumber.value,
             agent: e.target.agent.value,
             guests: e.target.guests.value,
+            meat: e.target.meat.value
         })
         props.route(e.target.agent.value, true);
     }
@@ -88,6 +89,14 @@ const Form = (props) => {
                     <option value="8">8</option>
                     <option value="9">9</option>
                     <option value="10">10</option>
+                </select>
+            </div>
+            <div className="form-group">
+                <label>Special Food Requests</label>
+                <select className="form-control" id="meat" required>
+                    <option value="">Choose One...</option>
+                    <option value="true">Meat</option>
+                    <option value="false">No Meat</option>
                 </select>
             </div>
             <div>
