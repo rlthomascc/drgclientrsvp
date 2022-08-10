@@ -126,34 +126,37 @@ class Admin extends Component {
     // nameTag Style
     const style = `<style>
     tagBody {
-        width: 8.5in;
+        width: 2.44in;
         margin: 0in .1875in;
+        text-orientation: sideways;
         }
     .label{
         /* Avery 5395 labels */
-        width: 3.38in; /* plus .6 inches from padding */
-        height: 2.33in; /* plus .125 inches from padding */
+        width: 2.44in; 
+        height: 1.18in;
         padding: 0;
         padding: .125in .3in 0;
         margin-right: .38in; /* the gutter */
         margin-bottom: .19in; /* the gutter */
+        text-orientation: sideways;
+        transform: rotate(90deg);
 
         float: left;
-
+        
         text-align: center;
         overflow: hidden;
-
+        
         outline: 1px dotted; /* outline doesn't occupy space like border does */
         }
     .page-break  {
         clear: left;
-        display:block;
+        display:portrait;
         page-break-after:always;
         }
     </style>`
 
-    let nameTag = `<div class="tagBody label"><br/><br/><br/> <h1>${lead.fullName}</h1><p>Agent: ${lead.agent}</p></div>
-    <div class="tagBody label"><br/><br/><br/><h1>${lead.spouseName}</h1><p>Agent: ${lead.agent}</p></div>`
+    // ONLY ADDED ONE NAME TAG. IF WORKS PROPERLY WE WILL DO A LOOP TO GRAB THE SECOND ONE AND RUN PRINTJS AGAIN.
+    let nameTag = `<br/><br/><br/><br/><br/><div class="tagBody label"> <h1>${lead.fullName}</h1><p>Agent: ${lead.agent}</p></div>`
 
     printJS({
       printable: nameTag,
@@ -237,7 +240,7 @@ class Admin extends Component {
               <a href="/"><img src="/photos/smaller.png" width="200px"/></a>
               <br/>
               <label className="font-weight-bold h3">Enter Passcode</label>
-              <input type="password" className="form-control" placeholder="**********" id="password" required />
+              <input type="password" className="form-control" placeholder="*******" id="password" required />
             </div>
             <div>
                 <button type="submit" className="btn btn-primary">Submit</button>
@@ -262,3 +265,34 @@ class Admin extends Component {
 }
 
 export default Admin;
+
+
+
+
+// `<style>
+//     tagBody {
+//         width: 8.5in;
+//         margin: 0in .1875in;
+//         }
+//     .label{
+//         /* Avery 5395 labels */
+//         width: 3.38in; /* plus .6 inches from padding */
+//         height: 2.33in; /* plus .125 inches from padding */
+//         padding: 0;
+//         padding: .125in .3in 0;
+//         margin-right: .38in; /* the gutter */
+//         margin-bottom: .19in; /* the gutter */
+
+//         float: left;
+
+//         text-align: center;
+//         overflow: hidden;
+
+//         outline: 1px dotted; /* outline doesn't occupy space like border does */
+//         }
+//     .page-break  {
+//         clear: left;
+//         display:block;
+//         page-break-after:always;
+//         }
+//     </style>`

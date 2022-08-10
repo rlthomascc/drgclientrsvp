@@ -17,7 +17,6 @@ const Form = (props) => {
             agent: e.target.agent.value,
             guests: e.target.guests.value,
         })
-
         props.route(e.target.agent.value, true);
     }
 
@@ -62,6 +61,7 @@ const Form = (props) => {
                     <option value="Eddie Sanchez"> Eddie Sanchez</option>
                     <option value="Indalecio Andy Del Real">Indalecio 'Andy' Del Real</option>
                     <option value="Jennifer Edwards">Jennifer Edwards</option>
+                    <option value="Luke Foster">Luke Foster</option>
                     <option value="Matt Foster">Matt Foster</option>
                     <option value="James Garcia">James Garcia</option>
                     <option value="Carlos Gutierrez">Carlos Gutierrez</option>

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 mongoose.connect(process.env.mongoUrl);
 
+
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -24,7 +25,7 @@ let rsvpSchema = ({
   timeOfEntry: {type: String, default: todaysDate, index: true }
 });
 
-let Rsvp = mongoose.model('Rsvp', rsvpSchema)
+let Rsvp2022 = mongoose.model('Rsvp2022', rsvpSchema)
 
 let invitesSchema = ({
   agent: String,
@@ -52,5 +53,5 @@ function save(e) {
 }
 
 
-let funcs = { Rsvp, save, Invites }
+let funcs = { Rsvp2022, save, Invites }
 module.exports = funcs;
